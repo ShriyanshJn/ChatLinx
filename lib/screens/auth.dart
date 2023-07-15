@@ -60,7 +60,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
                 width: MediaQuery.of(context).size.width * 0.54,
                 child: Image.asset(
-                  "assets/images/user-auth.gif",
+                  "assets/images/chatbubble.png",
                   fit: BoxFit.cover,
                 ),
               ),

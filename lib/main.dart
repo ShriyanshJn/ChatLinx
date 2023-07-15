@@ -33,11 +33,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData().copyWith(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color.fromARGB(255, 32, 174, 199),
+          seedColor: const Color.fromARGB(255, 108, 183, 245),
         ),
       ),
       home: StreamBuilder(
-          // stream: _streamController.stream (pipe.stream)
+          // stream: _streamController.stream (pipe.stream) ; stream continously keeps on listening for change
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             // time when firebase is checking the stream
@@ -48,6 +48,8 @@ class MyApp extends StatelessWidget {
             if (snapshot.hasData) {
               return const ChatScreen();
             }
+            // as stream keeps on continuously listening,
+            // when user log out, they will be shifted to auth screen automatically
             return const AuthScreen();
           }),
     );
