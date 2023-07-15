@@ -1,8 +1,16 @@
-import 'package:flutter/material.dart';
-import 'firebase_options.dart';
-import 'package:firebase_core/firebase_core.dart';
+// Streams - Continuous flow of asynchronous data
+// We have a pipe (stream controller) in which data input (sink) and data output (stream)
+// Types - 1. Single subscription -> Only one subscriber(widget) can listen to a particular stream
+//         2. Multi subscription -> Multiple widget can listen to a stream
+// To make a particular widget listen to the stream controller we wrap it with stream builder
 
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'firebase_options.dart';
 import 'package:chat_app/screens/auth.dart';
+import 'package:chat_app/screens/chat.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +35,16 @@ class MyApp extends StatelessWidget {
           seedColor: const Color.fromARGB(255, 32, 174, 199),
         ),
       ),
-      home: const AuthScreen(),
+      home: StreamBuilder(
+          // stream: _streamController.stream (pipe.stream)
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            // if pipe has user data (auth token's there)
+            if (snapshot.hasData) {
+              return const ChatScreen();
+            }
+            return const AuthScreen();
+          }),
     );
   }
 }
