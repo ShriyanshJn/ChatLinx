@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:chat_app/widgets/user_image_picker.dart';
 
 // gives access to firebase obj which will be created & managed bts by firebase sdk
 final _firebase = FirebaseAuth.instance;
@@ -66,7 +67,7 @@ class _AuthScreenState extends State<AuthScreen> {
               ),
               Card(
                 elevation: 4,
-                margin: const EdgeInsets.all(20),
+                margin: const EdgeInsets.all(25),
                 child: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.all(16),
@@ -74,6 +75,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         key: _formKey,
                         child: Column(
                           children: [
+                            if (!_isLogin) const UserImagePicker(),
                             TextFormField(
                               decoration: const InputDecoration(
                                 labelText: 'Email Address',

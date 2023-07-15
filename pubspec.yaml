@@ -38,6 +38,8 @@ dependencies:
   firebase_core: ^2.15.0
   firebase_auth: ^4.7.0
   flutter_launcher_icons: ^0.13.1
+  firebase_storage: ^11.2.5
+  image_picker: ^1.0.1
 
 dev_dependencies:
   flutter_test:
