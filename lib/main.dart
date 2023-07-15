@@ -11,6 +11,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
 import 'package:chat_app/screens/auth.dart';
 import 'package:chat_app/screens/chat.dart';
+import 'package:chat_app/screens/splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,6 +40,10 @@ class MyApp extends StatelessWidget {
           // stream: _streamController.stream (pipe.stream)
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
+            // time when firebase is checking the stream
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const SplashScreen();
+            }
             // if pipe has user data (auth token's there)
             if (snapshot.hasData) {
               return const ChatScreen();
