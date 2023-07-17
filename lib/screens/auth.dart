@@ -22,7 +22,7 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   final _formKey = GlobalKey<FormState>();
   var _isLogin = true;
-  var _enteredEmail = '', _enteredPassword = '';
+  var _enteredEmail = '', _enteredPassword = '', _enteredUsername = '';
   File? _selectedImage;
   var _isAuthenticating = false;
 
@@ -53,13 +53,14 @@ class _AuthScreenState extends State<AuthScreen> {
         // we get the url for the user storage to display image from firebase when the user logins
         final imageUrl = await storageRef.getDownloadURL();
         await FirebaseFirestore.instance
-            .collection('users')  // go or create users folder
-            .doc(userCredentials.user!.uid)   // create a doc named b/w braces
-            .set({    // set data in that doc
-              'username' : 'TODO',
-              'email' : _enteredEmail,
-              'image_url' : imageUrl,
-            });
+            .collection('users') // go or create users folder
+            .doc(userCredentials.user!.uid) // create a doc named b/w braces
+            .set({
+          // set data in that doc
+          'username': _enteredUsername,
+          'email': _enteredEmail,
+          'image_url': imageUrl,
+        });
       }
     } on FirebaseAuthException catch (error) {
       ScaffoldMessenger.of(context).clearSnackBars();
@@ -132,6 +133,24 @@ class _AuthScreenState extends State<AuthScreen> {
                                 _enteredEmail = value!;
                               },
                             ),
+                            if (!_isLogin)
+                              TextFormField(
+                                decoration: const InputDecoration(
+                                  labelText: 'Username',
+                                ),
+                                enableSuggestions: false,
+                                validator: (val) {
+                                  if (val == null ||
+                                      val.isEmpty ||
+                                      val.trim().length < 4) {
+                                    return 'Username size must be atleast 4!';
+                                  }
+                                  return null;
+                                },
+                                onSaved: (val) {
+                                  _enteredUsername = val!;
+                                },
+                              ),
                             TextFormField(
                               decoration: const InputDecoration(
                                 labelText: 'Password',
