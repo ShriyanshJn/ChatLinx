@@ -20,8 +20,8 @@ class _NewMessageState extends State<NewMessage> {
   }
 
   void _submitMessage() async {
-    final _enteredMessage = _messageController.text;
-    if (_enteredMessage == null || _enteredMessage.trim().isEmpty) {
+    final enteredMessage = _messageController.text;
+    if (enteredMessage == null || enteredMessage.trim().isEmpty) {
       return;
     }
 
@@ -37,7 +37,7 @@ class _NewMessageState extends State<NewMessage> {
         .get();
     // adding data to chat folder in firestore // collection.doc(ourgenerated user id), collection.add -> firestore sutomatically generates uid
     FirebaseFirestore.instance.collection('chat').add({
-      'text': _enteredMessage,
+      'text': enteredMessage,
       'createdAt': Timestamp.now(),
       'userId': user.uid,
       'username': userData.data()!['username'],
