@@ -1,3 +1,6 @@
+// store files in Firebase storage
+// store user meta data in Firestore like path to user uploaded images, username, chat messages
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,11 +22,16 @@ class _AuthScreenState extends State<AuthScreen> {
   var _isLogin = true;
   var _enteredEmail = '', _enteredPassword = '';
   File? _selectedImage;
+  var _isAuthenticating = false;
+
   void _submit() async {
     final isValid = _formKey.currentState!.validate();
     if (!isValid || (!_isLogin && _selectedImage == null)) return;
     _formKey.currentState!.save();
     try {
+      setState(() {
+        _isAuthenticating = true;
+      });
       // currently in login mode
       if (_isLogin) {
         // log users in
@@ -50,6 +58,10 @@ class _AuthScreenState extends State<AuthScreen> {
           content: Text(error.message ?? 'Authentication failed!'),
         ),
       );
+      // if user submit and get error we remove circular indicator
+      setState(() {
+        _isAuthenticating = false;
+      });
     }
   }
 
@@ -128,25 +140,29 @@ class _AuthScreenState extends State<AuthScreen> {
                             const SizedBox(
                               height: 12,
                             ),
-                            ElevatedButton(
-                              onPressed: _submit,
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Theme.of(context)
-                                    .colorScheme
-                                    .primaryContainer,
+                            if(_isAuthenticating)
+                              const CircularProgressIndicator(),
+                            if(!_isAuthenticating)
+                              ElevatedButton(
+                                onPressed: _submit,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .primaryContainer,
+                                ),
+                                child: Text(_isLogin ? 'Login' : 'Signup'),
                               ),
-                              child: Text(_isLogin ? 'Login' : 'Signup'),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                setState(() {
-                                  _isLogin = !_isLogin;
-                                });
-                              },
-                              child: (_isLogin)
-                                  ? const Text('Create an acccount')
-                                  : const Text('Already have an account?'),
-                            ),
+                            if(!_isAuthenticating)
+                              TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _isLogin = !_isLogin;
+                                  });
+                                },
+                                child: (_isLogin)
+                                    ? const Text('Create an acccount')
+                                    : const Text('Already have an account?'),
+                              ),
                           ],
                         )),
                   ),

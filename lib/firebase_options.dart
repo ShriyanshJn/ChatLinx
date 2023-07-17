@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:chat_app/keys/.env';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -50,7 +51,7 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC5zr2gBAz7IOeBnuaksiiBt-M8L0r6BZQ',
+    apiKey: androidAPIKey,
     appId: '1:946668454272:android:30959e356500f78776c165',
     messagingSenderId: '946668454272',
     projectId: 'chat-app-20e6f',
@@ -58,7 +59,7 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDNgSA20-XBHtPnzhwfYsUIPFvRK0C7tzg',
+    apiKey: iOSAPIKey,
     appId: '1:946668454272:ios:f6e54f84df2ada2b76c165',
     messagingSenderId: '946668454272',
     projectId: 'chat-app-20e6f',
