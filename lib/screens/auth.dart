@@ -30,6 +30,7 @@ class _AuthScreenState extends State<AuthScreen> {
     final isValid = _formKey.currentState!.validate();
     if (!isValid || (!_isLogin && _selectedImage == null)) return;
     _formKey.currentState!.save();
+    FocusScope.of(context).unfocus();
     try {
       setState(() {
         _isAuthenticating = true;
