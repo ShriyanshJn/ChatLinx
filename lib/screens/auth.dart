@@ -5,6 +5,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:chat_app/widgets/user_image_picker.dart';
 
 // gives access to firebase obj which will be created & managed bts by firebase sdk
@@ -50,6 +52,14 @@ class _AuthScreenState extends State<AuthScreen> {
         await storageRef.putFile(_selectedImage!);
         // we get the url for the user storage to display image from firebase when the user logins
         final imageUrl = await storageRef.getDownloadURL();
+        await FirebaseFirestore.instance
+            .collection('users')  // go or create users folder
+            .doc(userCredentials.user!.uid)   // create a doc named b/w braces
+            .set({    // set data in that doc
+              'username' : 'TODO',
+              'email' : _enteredEmail,
+              'image_url' : imageUrl,
+            });
       }
     } on FirebaseAuthException catch (error) {
       ScaffoldMessenger.of(context).clearSnackBars();
@@ -140,9 +150,9 @@ class _AuthScreenState extends State<AuthScreen> {
                             const SizedBox(
                               height: 12,
                             ),
-                            if(_isAuthenticating)
+                            if (_isAuthenticating)
                               const CircularProgressIndicator(),
-                            if(!_isAuthenticating)
+                            if (!_isAuthenticating)
                               ElevatedButton(
                                 onPressed: _submit,
                                 style: ElevatedButton.styleFrom(
@@ -152,7 +162,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                 ),
                                 child: Text(_isLogin ? 'Login' : 'Signup'),
                               ),
-                            if(!_isAuthenticating)
+                            if (!_isAuthenticating)
                               TextButton(
                                 onPressed: () {
                                   setState(() {
