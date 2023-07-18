@@ -1,10 +1,10 @@
-# chat_app
+# ChatLinx
 
-A new Flutter project.
+Connecting conversations, link by link.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Chat with your friends and different users present.
 
 A few resources to get you started if this is your first Flutter project:
 
