@@ -69,7 +69,7 @@ class MessageBubble extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: isMe
                           ? Colors.grey[300]
-                          : theme.colorScheme.secondary.withAlpha(200),
+                          : Theme.of(context).colorScheme.primary,
                       borderRadius: BorderRadius.only(
                         topLeft: !isMe && isFirstInSequence
                             ? Radius.zero
