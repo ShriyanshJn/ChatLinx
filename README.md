@@ -4,13 +4,9 @@ Connecting conversations, link by link.
 
 ## Getting Started
 
-Chat with your friends and different users present.
+Chat with your friends, different users and grow connections.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Screenshot_2023-07-19-00-58-07-698_com example chat_app](https://github.com/ShriyanshJn/ChatLinx/assets/107237771/fea37a0c-6b66-48ac-9f09-977619a49a99)
+![Screenshot_2023-07-19-00-58-03-861_com example chat_app](https://github.com/ShriyanshJn/ChatLinx/assets/107237771/b95b4e2d-e4d0-4cd2-bf19-eea7563a6184)
+![Screenshot_2023-07-19-00-57-35-650_com miui home](https://github.com/ShriyanshJn/ChatLinx/assets/107237771/8c7ad1b2-96f5-428e-882a-d83a9e1b2522)
+![Screenshot_2023-07-19-00-57-50-148_com example chat_app](https://github.com/ShriyanshJn/ChatLinx/assets/107237771/09354bfb-a829-4422-beec-3c5b008ada30
